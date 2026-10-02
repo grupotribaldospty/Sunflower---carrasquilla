@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PH Sunflower, Carrasquilla — Grupo Tribaldos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bay:#1b3a5c; --bay-deep:#0d1f33; --sand:#f2f4f7; --sand-card:#ffffff;
+    --ink:#1a2430; --muted:#6b7686; --line:#dde2e9;
+    --green:#2f7d4f; --green-bg:#e3f1e6; --amber:#9a6a16; --amber-bg:#fbf0d7;
+    --slate:#3a5566; --slate-bg:#e2ebf0;
+    --shadow:0 1px 2px rgba(13,31,51,.06),0 6px 24px rgba(13,31,51,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--sand);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:var(--bay);text-underline-offset:2px}
+  .wrap{max-width:980px;margin:0 auto;padding:0 20px}
+  header{background:linear-gradient(135deg,#20477a 0%,#0d1f33 100%);color:#fdfbf5;padding:22px 0 32px}
+  .header-brand{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+  .header-brand svg{height:40px;width:auto}
+  .eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;opacity:.8;font-weight:500}
+  h1{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(24px,4vw,34px);line-height:1.1;margin:6px 0 0}
+  .zone-sub{font-size:15px;opacity:.9;margin-top:6px}
+
+  .hero{position:relative;height:360px;border-radius:16px;overflow:hidden;background:#dfe6e2 center/cover no-repeat;margin:22px 0 0;box-shadow:var(--shadow);cursor:pointer}
+  @media(max-width:640px){.hero{height:240px}}
+  .hero-btn{position:absolute;bottom:16px;left:16px;background:rgba(13,31,51,.78);color:#fff;border:none;border-radius:99px;padding:10px 18px;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px}
+  .hero-btn:hover{background:rgba(13,31,51,.92)}
+
+  .price-row{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:10px;margin:22px 0 6px}
+  .price{font-family:'Fraunces',serif;font-size:36px;font-weight:600;color:var(--bay-deep)}
+  .ppm{font-size:13px;color:var(--muted);margin-left:8px}
+  .maint-tag{font-size:13.5px;color:var(--muted);background:#fff;border:1px solid var(--line);border-radius:99px;padding:6px 14px}
+
+  .facts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin:18px 0}
+  .fact{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;text-align:center;box-shadow:var(--shadow)}
+  .fact .n{font-family:'Fraunces',serif;font-size:21px;font-weight:600;color:var(--bay-deep)}
+  .fact .l{font-size:11px;color:var(--muted);letter-spacing:.03em;text-transform:uppercase;margin-top:3px}
+
+  section{margin:30px 0}
+  h2{font-family:'Fraunces',serif;font-weight:500;font-size:21px;margin-bottom:12px;color:var(--bay-deep)}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px;box-shadow:var(--shadow)}
+  .desc{font-size:14.5px;line-height:1.7}
+  .feature-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px 18px;margin-top:4px}
+  .feature-list div{font-size:14px;display:flex;align-items:flex-start;gap:8px}
+  .feature-list div::before{content:"\2713";color:var(--green);font-weight:700;flex-shrink:0}
+
+  .nearby-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:4px}
+  .nearby-item{display:flex;align-items:flex-start;gap:10px;font-size:14px;background:var(--slate-bg);border:1px solid #c7d5dc;border-radius:10px;padding:10px 12px}
+  .nearby-item .pin{font-size:18px;flex-shrink:0}
+
+  .map-wrap{border-radius:14px;overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line)}
+  .map-wrap iframe{width:100%;height:340px;border:0;display:block}
+
+  .ref-row{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-size:13px;color:var(--muted)}
+  .ref-badge{font-weight:600;color:var(--muted);background:#fff;border:1px solid var(--line);border-radius:7px;padding:6px 12px}
+
+  footer{text-align:center;color:var(--muted);font-size:12.5px;padding:30px 20px}
+  .brand-name{font-family:'Fraunces',serif;font-size:16px;font-weight:600;color:var(--bay-deep)}
+
+  .photos-btn{position:absolute;bottom:16px;left:16px}
+  .lightbox{position:fixed;inset:0;background:rgba(10,16,24,.92);z-index:999;display:flex;align-items:center;justify-content:center;padding:24px}
+  .lightbox[hidden]{display:none}
+  .lightbox-inner{max-width:min(920px,92vw);width:100%;display:flex;flex-direction:column;align-items:center;gap:12px}
+  .lightbox-imgwrap{position:relative;width:100%;display:flex;align-items:center;justify-content:center}
+  .lightbox img{max-width:100%;max-height:72vh;border-radius:10px;object-fit:contain;background:#0d1f33;box-shadow:0 12px 40px rgba(0,0,0,.5)}
+  .lightbox-nav{background:#fdfbf5;border:3px solid #1b3a5c;color:#0d1f33;min-width:72px;height:72px;border-radius:99px;font-size:19px;line-height:1;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 4px 16px rgba(0,0,0,.4);font-weight:700;padding:0 20px}
+  .lightbox-nav .arrow{font-size:34px;line-height:1}
+  .lightbox-nav:hover{background:#e8edf2}
+  .lightbox-nav:active{transform:scale(.95)}
+  .lightbox-navrow{display:flex;align-items:center;gap:20px;width:100%;justify-content:center;flex-wrap:wrap}
+  .lightbox-close{position:absolute;top:-20px;right:-20px;background:#c0392b;color:#fff;border:3px solid #fdfbf5;height:60px;border-radius:99px;font-size:19px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;padding:0 20px;box-shadow:0 4px 16px rgba(0,0,0,.4)}
+  .lightbox-close .arrow{font-size:26px;line-height:1}
+  .lightbox-close:hover{background:#a02e20}
+  .lightbox-close:active{transform:scale(.95)}
+  .lightbox-meta{color:#fdfbf5;font-size:18px;text-align:center;opacity:.95}
+  .lightbox-meta b{font-weight:700;font-size:19px}
+  @media(max-width:560px){
+    .lightbox-nav{min-width:0;padding:0 14px;height:60px}
+    .lightbox-nav span:not(.arrow){display:none}
+    .lightbox-close{top:-16px;right:-16px;padding:0 16px;height:52px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="header-brand">
+      <svg viewBox="0 0 720 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Grupo Tribaldos Realtors">
+        <text x="130" y="108" font-family="Georgia,'Times New Roman',serif" font-size="42" font-weight="700" fill="#fdfbf5">Grupo</text>
+        <text x="85" y="185" font-family="Arial,Helvetica,sans-serif" font-size="92" font-weight="800" letter-spacing="-1" fill="#fdfbf5">TRIBALDOS</text>
+        <text x="618" y="140" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="700" fill="#fdfbf5">®</text>
+        <text x="428" y="232" font-family="Georgia,'Times New Roman',serif" font-size="46" font-weight="700" fill="#fdfbf5">Realtors</text>
+        <path d="M348 15c-20 0-36 16-36 36 0 27 36 68 36 68s36-41 36-68c0-20-16-36-36-36z" fill="#c0392b"/>
+        <circle cx="348" cy="51" r="19" fill="#6e2233"/>
+      </svg>
+    </div>
+    <div class="eyebrow">Ciudad de Panamá · Carrasquilla</div>
+    <h1>PH Sunflower, Carrasquilla</h1>
+    <div class="zone-sub">Apartamento de 2 recámaras y 2 baños · Edificio del 2008</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="hero" id="hero" onclick="openGallery()">
+    <button class="hero-btn" onclick="event.stopPropagation();openGallery()">\u{1F4F7} Ver las 13 fotos</button>
+  </div>
+
+  <div class="price-row">
+    <div><span class="price">$108,000</span><span class="ppm">$1,350/m²</span></div>
+    <div class="maint-tag">Mantenimiento: $120/mes</div>
+  </div>
+
+  <div class="facts-grid">
+    <div class="fact"><div class="n">2</div><div class="l">Recámaras</div></div>
+    <div class="fact"><div class="n">2</div><div class="l">Baños</div></div>
+    <div class="fact"><div class="n">80 m²</div><div class="l">Área</div></div>
+    <div class="fact"><div class="n">1</div><div class="l">Parqueo</div></div>
+    <div class="fact"><div class="n">Piso 6</div><div class="l">Nivel</div></div>
+    <div class="fact"><div class="n">2008</div><div class="l">Año edificio</div></div>
+  </div>
+
+  <section>
+    <h2>Descripción</h2>
+    <div class="card">
+      <p class="desc">Apartamento de 2 recámaras y 2 baños en PH Sunflower, Carrasquilla, ubicado en el piso 6 con balcón. Cuenta con un den adicional, sala-comedor y cocina abierta, lavandería interna y el edificio tiene 2 elevadores. Construido en 2008, está a pasos de Vía España, de las clínicas América y San Fernando, y muy cerca de la estación del Metro de Vía Fernández de Córdoba.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Características del apartamento</h2>
+    <div class="card">
+      <div class="feature-list">
+        <div>2 recámaras</div>
+        <div>2 baños completos</div>
+        <div>Den (cuarto adicional / oficina)</div>
+        <div>Sala - comedor</div>
+        <div>Cocina abierta</div>
+        <div>Balcón</div>
+        <div>Lavandería interna</div>
+        <div>1 estacionamiento</div>
+        <div>2 elevadores en el edificio</div>
+        <div>Seguridad y acceso controlado</div>
+        <div>Piso 6</div>
+        <div>Edificio construido en 2008</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Puntos cercanos</h2>
+    <div class="nearby-list">
+      <div class="nearby-item"><span class="pin">🍞</span><span>Planta Bimbo (Carrasquilla)</span></div>
+      <div class="nearby-item"><span class="pin">🏥</span><span>Hospital San Fernando</span></div>
+      <div class="nearby-item"><span class="pin">🌳</span><span>Parque Omar</span></div>
+      <div class="nearby-item"><span class="pin">🛣</span><span>Salidas / acceso directo a Vía España</span></div>
+      <div class="nearby-item"><span class="pin">🚕</span><span>Clínica América</span></div>
+      <div class="nearby-item"><span class="pin">🚇</span><span>Estación del Metro (Vía Fernández de Córdoba)</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Ubicación</h2>
+    <div class="map-wrap">
+      <iframe src="https://maps.google.com/maps?q=PH Sunflower, Carrasquilla, Ciudad de Panam%C3%A1&t=m&z=16&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+    </div>
+  </section>
+
+  <div class="ref-row">
+    <span class="ref-badge">Ref: ph-sunflower-carrasquilla</span>
+    <span>verificado 2026-09-30</span>
+  </div>
+
+</div>
+
+<footer>
+  Datos tomados de listado público activo en el portal inmobiliario, verificado el 30/09/2026 · El precio y la disponibilidad pueden cambiar.
+  <div style="margin-top:14px">
+    <div class="brand-name">Grupo Tribaldos</div>
+  </div>
+</footer>
+
+<script>
+const PHOTOS = ["https://photos.encuentra24.com/t_or_fh_m/f_auto/v1/pa/32/71/10/66/32711066_47d64d354a725e4e10c10716010f6507-ac35510","https://photos.encuentra24.com/t_or_fh_m/f_auto/v1/pa/32/71/10/66/32711066_47d64d354a725e4e10c10716010f6507-7541666","https://photos.encuentra24.com/t_or_fh_m/f_auto/v1/pa/32/71/10/66/32711066_47d64d354a725e4e10c10716010f6507-bb7be31","https://photos.encuentra24.com/t_or_fh_m/f_auto/v1/pa/32/71/10/66/32711066_47d64d354a725e4e10c10716010f6507-dbf16e8","https://photos.encuentra24.com/t_or_fh_m/f_auto/v1/pa/32/71/10/66/32711066_47d64d354a725e4e10c10716010f6507-d33a1a5","https://photos.encuentra24.com/t_or_fh_m/f_auto/v1/pa/32/71/10/66/32711066_47d64d354a725e4e10c10716010f6507-a90c815","https://photos.encuentra24.com/t_or_fh_m/f_auto/v1/pa/32/71/10/66/32711066_47d64d354a725e4e10c10716010f6507-80a5517","https://photos.encuentra24.com/t_or_fh_m/f_auto/v1/pa/32/71/10/66/32711066_47d64d354a725e4e10c10716010f6507-8859fb0","https://photos.encuentra24.com/t_or_fh_m/f_auto/v1/pa/32/71/10/66/32711066_47d64d354a725e4e10c10716010f6507-613eff3","https://photos.encuentra24.com/t_or_fh_m/f_auto/v1/pa/32/71/10/66/32711066_47d64d354a725e4e10c10716010f6507-d45348f","https://photos.encuentra24.com/t_or_fh_m/f_auto/v1/pa/32/71/10/66/32711066_47d64d354a725e4e10c10716010f6507-057b972","https://photos.encuentra24.com/t_or_fh_m/f_auto/v1/pa/32/71/10/66/32711066_47d64d354a725e4e10c10716010f6507-6ce6a82","https://photos.encuentra24.com/t_or_fh_m/f_auto/v1/pa/32/71/10/66/32711066_47d64d354a725e4e10c10716010f6507-9814441"];
+let galleryIndex = 0;
+function openGallery(){
+  galleryIndex = 0;
+  showPhoto();
+  document.getElementById("lightbox").hidden = false;
+  document.body.style.overflow = "hidden";
+}
+function closeGallery(){
+  document.getElementById("lightbox").hidden = true;
+  document.body.style.overflow = "";
+}
+function showPhoto(){
+  document.getElementById("lightbox-img").src = PHOTOS[galleryIndex];
+  document.getElementById("lightbox-counter").textContent = (galleryIndex+1)+" / "+PHOTOS.length;
+}
+function nextPhoto(){ galleryIndex = (galleryIndex+1) % PHOTOS.length; showPhoto(); }
+function prevPhoto(){ galleryIndex = (galleryIndex-1+PHOTOS.length) % PHOTOS.length; showPhoto(); }
+document.addEventListener("keydown", e=>{
+  const lb = document.getElementById("lightbox");
+  if(lb && !lb.hidden){
+    if(e.key==="Escape") closeGallery();
+    if(e.key==="ArrowRight") nextPhoto();
+    if(e.key==="ArrowLeft") prevPhoto();
+  }
+});
+document.addEventListener("click", e=>{
+  if(e.target && e.target.id === "lightbox") closeGallery();
+});
+document.getElementById("hero").style.backgroundImage = "url('" + PHOTOS[0] + "')";
+</script>
+
+<div class="lightbox" id="lightbox" hidden>
+  <div class="lightbox-inner">
+    <div class="lightbox-imgwrap">
+      <button class="lightbox-close" onclick="closeGallery()" title="Cerrar" aria-label="Cerrar"><span class="arrow">✕</span><span>Cerrar</span></button>
+      <img id="lightbox-img" src="" alt="Foto de la propiedad">
+    </div>
+    <div class="lightbox-navrow">
+      <button class="lightbox-nav" onclick="prevPhoto()" title="Foto anterior" aria-label="Foto anterior"><span class="arrow">‹</span><span>Anterior</span></button>
+      <div class="lightbox-meta"><b>PH Sunflower, Carrasquilla</b><br><span id="lightbox-counter"></span></div>
+      <button class="lightbox-nav" onclick="nextPhoto()" title="Foto siguiente" aria-label="Foto siguiente"><span>Siguiente</span><span class="arrow">›</span></button>
+    </div>
+  </div>
+</div>
+</body>
+</html>
